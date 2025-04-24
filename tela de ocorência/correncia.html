@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ocorrência</title>
+    <link rel="stylesheet" href="ocorrencia.css">
+</head>
+
+<body>
+    <div class="registro">
+        <header>
+            <nav>
+                <a href="../tela navegação/navegacao.html">
+                    <img src="../tela de ocorência/voltar.jpeg" alt="voltar" width="40">
+                </a>
+            </nav>
+        </header>
+
+        <div class="registe">
+            <h1>Registre a Ocorrência</h1>
+        </div>
+
+        <form action="http://localhost/bairro_alerta/tela de ocorência/registro_ocorrencias.php" method="POST">
+            <section class="container01">
+                <div class="Endereço">
+                    <div>Endereço: <input type="text" name="endereco" placeholder="Rua..."></div>
+                    <div>Cep: <input type="text" name="cep" placeholder="Cep"></div>
+                </div>
+                <div class="botão">
+                    <img src="icon.png" alt="" width="40">
+                    <button type="button">Buscar no mapa</button>
+                </div>
+            </section>
+
+            <section class="container02">
+                <div>
+                    <label for="tipo_ocorrencia">O que ocorreu?</label>
+                    <select name="tipo_ocorrencia" id="tipo_ocorrencia">
+                        <option value="">Selecione</option>
+                        <option value="Assalto">Assalto</option>
+                        <option value="Furto">Furto</option>
+                        <option value="Roubo">Roubo</option>
+                        <option value="Assassinato">Assassinato</option>
+                        <option value="Latrocínio">Latrocínio</option>
+                        <option value="Invasão">Invasão a domicílio/estabelecimento</option>
+                        <option value="Assédio">Assédio</option>
+                        <option value="Importunação">Importunação sexual</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="item_roubado">O que foi roubado?</label>
+                    <select name="item_roubado" id="item_roubado">
+                        <option value="">Selecione</option>
+                        <option value="Carro">Carro</option>
+                        <option value="Moto">Moto</option>
+                        <option value="Bicicleta">Bicicleta</option>
+                        <option value="Celular">Celular</option>
+                        <option value="Carteira">Carteira</option>
+                        <option value="Bolsa">Bolsa</option>
+                        <option value="Roupa">Roupa</option>
+                        <option value="Chapéu">Chapéu</option>
+                        <option value="Computador">Computador</option>
+                        <option value="Óculos">Óculos</option>
+                        <option value="Fone">Fone</option>
+                        <option value="Relógio">Relógio</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="horario">Em qual horário ocorreu?</label>
+                    <select name="horario" id="horario">
+                        <option value="">Selecione</option>
+                        <option value="Manhã">Manhã</option>
+                        <option value="Tarde">Tarde</option>
+                        <option value="Noite">Noite</option>
+                        <option value="Madrugada">Madrugada</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+            </section>
+
+            <div class="lista">
+                <h1 class="rua">Como é a rua?</h1>
+                <ul>
+                    <li><input type="checkbox" id="postes_apagados" name="postes_apagados"> <label
+                            for="postes_apagados">Tem postes apagados?</label></li>
+                    <li><input type="checkbox" id="pouco_movimento_pessoas" name="pouco_movimento_pessoas"> <label
+                            for="pouco_movimento_pessoas">Pouco/Nenhum movimento de pessoas?</label></li>
+                    <li><input type="checkbox" id="pouco_movimento_veiculos" name="pouco_movimento_veiculos"> <label
+                            for="pouco_movimento_veiculos">Pouco/Nenhum movimento de veículos?</label></li>
+                    <li><input type="checkbox" id="outros_assaltos" name="outros_assaltos"> <label
+                            for="outros_assaltos">Houve outros assaltos nessa rua?</label></li>
+                </ul>
+            </div>
+
+            <div class="ocorrido">
+                <label for="mensagem">
+                    <h1 class="descreva">Descreva o ocorrido:</h1>
+                </label>
+                <textarea id="mensagem" name="mensagem" rows="10" cols="50"
+                    placeholder="Digite sua mensagem aqui..."></textarea>
+            </div>
+
+            <div class="container3">
+                <div class="cancelar"><br><input type="reset" value="Cancelar"><br></div>
+                <div class="cadastrar"><br><input type="submit" value="Cadastrar"><br></div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

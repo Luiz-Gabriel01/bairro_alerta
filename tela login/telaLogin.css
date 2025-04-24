@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000306;
+  }
+  .login-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  .login-container h2 {
+    margin-bottom: 20px;
+    color: #333333;
+  }
+  .login-container input[type="email"],
+  .login-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid  #DAA520;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border 0.3s;
+  }
+  .login-container input[type="text"]:focus,
+  .login-container input[type="password"]:focus {
+    border-color: #DAA520;
+    outline: none;
+  }
+
+
+  .login-container button:hover {
+    background-color:#080702;
+  }
+
+  .login-container a {
+    display: block;
+    margin-top: 10px;
+    color: #010204;
+    text-decoration: none;
+  }
+  .login-container a:hover {
+    text-decoration:#0056b3;
+    text-decoration: none;
+    
+  }
+  .button {
+    text-decoration: none;
+    width: 100%;
+    padding: 12px;
+    background-color: #DAA520;
+    border: none;
+    border-radius: 5px;
+    color: white; 
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: backgroun 0.3s;
+    margin-top: 15px;
+    text-decoration: none;
+  }
+  .button a{
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    color: white
+  }
+  .botao a:hover {
+    color:  #DAA520;
+  }
+  
+  
+  

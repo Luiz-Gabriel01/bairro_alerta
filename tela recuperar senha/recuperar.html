@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha</title>
+    <link rel="stylesheet" href="recuperar.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../tela login/telaLogin.html">
+                <img src="../tela de ocorência/voltar.jpeg" alt="butao" width="40">
+            </a>
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            <h2>Recuperação de Senha</h2>
+            <form id="recoverForm">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                <button type="submit">Enviar Link de Recuperação</button>
+            </form>
+            <div class="message" id="message"></div>
+        </div>
+    
+    </section>
+ 
+    <script>
+        document.getElementById('recoverForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+
+            // Aqui você pode adicionar lógica para enviar o e-mail para o servidor
+
+            // Simulação de mensagem de sucesso
+            document.getElementById('message').innerText = 'Um link de recuperação foi enviado para ' + email + '.';
+        });
+    </script>
+</body>
+</html>
+

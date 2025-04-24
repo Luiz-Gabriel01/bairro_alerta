@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vindo ao Nosso Site</title>
+  <link rel="stylesheet" href="inicial.css">
+
+</head>
+<body>
+
+  <header>
+    <div class="logan">
+      <img src="logo.jpg" alt="logan" width="40">
+      <h1>Bairro Alerta</h1>
+  </div>
+  
+    <nav>
+      <a href="#">Sobre nós</a>
+   
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+   
+<div class="slideshow-container">
+    <!-- Slides -->
+    <div class="slide active">
+      <img src="logo.jpg" alt="" width="400">
+    </div>
+    <div class="slide active">
+      <img src="login.avif" alt="" width="">
+    </div>
+    <div class="slide active">
+      <img src="rota.avif" alt="" width="500">
+    </div>
+    <div class="slide active">
+      <img src="perigo.avif" alt="">
+    </div>
+    <div class="slide active">
+      <img src="formulario.jpg" alt="" width="500">
+    </div>
+    <div class="slide active">
+      <img src="furto.jpg" alt="" width="500">
+    </div>
+  
+    <!-- Botões de navegação -->
+    <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
+    <a class="next" onclick="mudarSlide(1)">&#10095;</a>
+  </div>
+  
+  <!-- Indicadores (bolinhas) -->
+  <div class="dots-container">
+    <span class="dot" onclick="mostrarSlideAtual(0)"></span> 
+    <span class="dot" onclick="mostrarSlideAtual(1)"></span> 
+    <span class="dot" onclick="mostrarSlideAtual(2)"></span> 
+    <span class="dot" onclick="mostrarSlideAtual(3)"></span> 
+    <span class="dot" onclick="mostrarSlideAtual(4)"></span> 
+    <span class="dot" onclick="mostrarSlideAtual(5)"></span> 
+
+  </div>
+  
+  <script>
+    let slideIndex = 0;
+    mostrarSlide(slideIndex);
+  
+    function mudarSlide(n) {
+      mostrarSlide(slideIndex += n);
+    }
+  
+    function mostrarSlideAtual(n) {
+      mostrarSlide(slideIndex = n);
+    }
+  
+    function mostrarSlide(n) {
+      const slides = document.getElementsByClassName("slide");
+      const dots = document.getElementsByClassName("dot");
+  
+      if (n >= slides.length) { slideIndex = 0; }
+      if (n < 0) { slideIndex = slides.length - 1; }
+  
+      // Esconder todos os slides
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+  
+      // Remover a classe 'active' de todos os pontos
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+  
+      // Mostrar o slide atual e adicionar a classe 'active' ao ponto correspondente
+      slides[slideIndex].style.display = "block";
+      dots[slideIndex].className += " active";
+    }
+  </script>
+    </div>
+  </section>
+
+  <section class="intro">
+    <h2>Quem Somos</h2>
+    <p>Somos uma plataforma coladorativa focada na segurança e bem-estar da comunidade.</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <div class="alerta">
+        <img src="logo.jpg" alt="Bairro alerta" width="40">
+        <p class="titulo">Bairro Alerta</p>
+      </div>
+      <h3>Mapeamento das ruas</h3> <br>
+      <p>Os usuários terão acesso ao mapeamento das ocorrências nos bairros RMR.</p>
+      </div>
+      
+      <div class="card">
+      <div class="alerta">
+        <img src="./logo.jpg" alt= "Bairro Alerta" width="40">
+         <p class="titulo">Bairro Alerta</p>
+      </div>
+      <h3>Registrar</h3><br>
+      <p >Os usuários poderam registrar e verificar os crimes ocorridos nas ruas.</p>
+      </div>
+
+       <div class="card">
+        <div class="alerta">
+          <img src="logo.jpg" alt="Bairro Alerta" width="40">
+          <p class="titulo">Bairro Alerta</p>
+        </div>
+      <h3>Melhor rota</h3> <br>
+      <p>Os usuários terão acesso as melhores rotas para percorrer em seguraça até seu destino.</p>
+    </div>
+  </section>
+
+
+  <section class="call-to-action">
+    <h2>Pronto para uma experiência nova?</h2>
+    <button class="button">
+      <a href="../tela login/telaLogin.html">Entrar</a>
+    </button>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 - Todos os direitos reservados.</p>
+    <p>Email: bairroalerta@nosso-site.com | Telefone: (00) 0000-0000</p>
+  </footer>
+
+</body>
+</html>
+
+

@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  body {
+    color: #333;
+    background-color: #f4f4f4;
+  }
+  .logan {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color:  #DAA520;
+    
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #01060c;
+    color: white;
+    padding: 1rem 2rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+  nav a {
+    color:  #DAA520;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    background: url('banner.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+  .hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    
+  }
+  .intro {
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff;
+  }
+  .intro h2 {
+    color:  #DAA520;
+    margin-bottom: 1rem;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2rem;
+    background-color: #e9ecef;
+  }
+  .card {
+    background-color: #fff;
+    width: 300px;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  .card img {
+   
+    border-radius: 8px;
+  }
+  .card h3 {
+    margin-top: 1rem;
+    color: #000305;
+  }
+  .call-to-action {
+    background-color: #000203;
+    color:  #DAA520;
+    padding: 2rem;
+    text-align: center;
+  }
+  .call-to-action h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .button {
+    width: 25%;
+    padding: 12px;
+    background-color: #DAA520;
+    border: none;
+    border-radius: 5px;
+    color: white; 
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: backgroun 0.3s;
+    margin-top: 15px;
+    text-decoration: none;
+  }
+  .button a {
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    color: white
+  }
+  .button:hover{
+    background-color: #0a0a00;
+  }
+  footer {
+    background-color:#333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+      /* Estilos básicos do slideshow */
+      .slideshow-container {
+        position: relative;
+        max-width: 1500px;
+        margin: auto;
+        overflow: hidden;
+      }
+  
+      .slide {
+        display: none;
+        text-align: center;
+        height: 400px;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+  
+      .active {
+        display: block;
+      }
+  
+      /* Indicadores (bolinhas) */
+      .dots-container {
+        text-align: center;
+        margin-top: 15px;
+      }
+  
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s;
+      }
+  
+      .dot.active {
+        background-color: #717171;
+      }
+  
+      /* Botões de navegação */
+      .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 10px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+  
+      .prev {
+        left: 0;
+        border-radius: 0 3px 3px 0;
+      }
+  
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+     .alerta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     }
+     .titulo {
+      font-weight:bold ;
+      color:  #DAA520;
+      
+     }
+     .acesse {
+      width: 100%;
+      padding: 12px;
+      background-color: #DAA520;
+      border: none;
+      border-radius: 5px;
+      color: white; 
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: backgroun 0.3s;
+      margin-top: 15px;
+      text-decoration: none;
+    }

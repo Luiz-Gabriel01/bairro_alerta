@@ -16,7 +16,7 @@ $result = mysqli_query($conexao, $query);
 
 if (mysqli_num_rows($result) > 0) {
     // Login bem-sucedido: Redirecionar para a página home
-    header("Location: ../tela navegação/navegacao.html");
+    header("Location: ../Telanavegacao/navegacao.html");
     exit();
 } else {
     // Login falhou: Mostrar erro e voltar à tela de login

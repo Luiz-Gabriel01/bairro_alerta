@@ -31,7 +31,7 @@
         if (mysqli_query($conexao, $sql)) {
             echo "<script>
                     alert('Cadastro realizado com sucesso!');
-                    window.location.href = './tela login/telaLogin.html';
+                    window.location.href = './Telalogin/telaLogin.html';
                   </script>";
             exit();
         } else {

@@ -1,4 +1,6 @@
 <?php
+session_start(); // Necessário para usar $_SESSION
+
 // Conexão com o banco
 $servername = "localhost";
 $username = "root";
@@ -10,13 +12,12 @@ if ($conn->connect_error) {
   die("Conexão falhou: " . $conn->connect_error);
 }
 
-// 🧾 Receber os dados do formulário
+// Receber os dados do formulário
 $endereco = $_POST['endereco'] ?? '';
 $cep = $_POST['cep'] ?? '';
 $descricao = $_POST['mensagem'] ?? '';
 
-// 🔽 Tratamento dos SELECTS com mapa de valores/texto
-
+// Mapas para texto legível
 $tipo_ocorrencia_valor = $_POST['tipo_ocorrencia'] ?? '';
 $tipos_ocorrencia_map = [
   'assalto' => 'Assalto',
@@ -59,25 +60,16 @@ $horarios_map = [
 ];
 $horario_texto = $horarios_map[$horario_valor] ?? 'Não especificado';
 
-// 🟩 Checkboxes → converter em lista de textos
+// Checkboxes
 $checklist = [];
-
-if (isset($_POST['postes_apagados'])) {
-  $checklist[] = "Tem postes apagados";
-}
-if (isset($_POST['pouco_movimento_pessoas'])) {
-  $checklist[] = "Pouco/Nenhum movimento de pessoas";
-}
-if (isset($_POST['pouco_movimento_veiculos'])) {
-  $checklist[] = "Pouco/Nenhum movimento de veículos";
-}
-if (isset($_POST['outros_assaltos'])) {
-  $checklist[] = "Houve outros assaltos nessa rua";
-}
+if (isset($_POST['postes_apagados'])) $checklist[] = "Tem postes apagados";
+if (isset($_POST['pouco_movimento_pessoas'])) $checklist[] = "Pouco/Nenhum movimento de pessoas";
+if (isset($_POST['pouco_movimento_veiculos'])) $checklist[] = "Pouco/Nenhum movimento de veículos";
+if (isset($_POST['outros_assaltos'])) $checklist[] = "Houve outros assaltos nessa rua";
 
 $condicoes_rua = implode(", ", $checklist);
 
-// 💾 Inserção no banco
+// Inserção no banco
 $sql = "INSERT INTO ocorrencias (
     endereco, cep, tipo_ocorrencia_valor, tipo_ocorrencia_texto,
     item_roubado_valor, item_roubado_texto, horario_valor, horario_texto,
@@ -100,7 +92,18 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-  echo "Ocorrência registrada com sucesso!";
+  // Salvar dados na sessão e redirecionar
+  $_SESSION['dados_ocorrencia'] = [
+    'endereco' => $endereco,
+    'cep' => $cep,
+    'tipo' => $tipo_ocorrencia_texto,
+    'item' => $item_roubado_texto,
+    'horario' => $horario_texto,
+    'condicoes' => $condicoes_rua,
+    'descricao' => $descricao
+  ];
+  header("Location: http://localhost/bairro_alerta/TelaDeOcorrencia/confirmacao.php");
+  exit();
 } else {
   echo "Erro ao registrar: " . $stmt->error;
 }

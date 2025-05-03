@@ -18,7 +18,7 @@ unset($_SESSION['dados_ocorrencia']);
 <head>
     <meta charset="UTF-8">
     <title>Confirmação de Ocorrência</title>
-    <link rel="stylesheet" href="./confirmacao.css">
+    <link rel="stylesheet" href="confirmacao.css">
 
 </head>
 

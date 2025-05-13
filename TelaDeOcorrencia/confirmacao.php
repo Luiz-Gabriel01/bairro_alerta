@@ -8,7 +8,7 @@ if (!isset($_SESSION['dados_ocorrencia'])) {
 
 $dados = $_SESSION['dados_ocorrencia'];
 
-// Limpar os dados após exibição para evitar que persistam entre requisições
+
 unset($_SESSION['dados_ocorrencia']);
 ?>
 

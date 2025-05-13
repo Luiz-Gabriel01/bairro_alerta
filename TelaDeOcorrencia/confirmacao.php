@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Inicia a sessão apenas uma vez
 
 if (!isset($_SESSION['dados_ocorrencia'])) {
     echo "Nenhuma ocorrência para confirmar.";
@@ -8,7 +8,7 @@ if (!isset($_SESSION['dados_ocorrencia'])) {
 
 $dados = $_SESSION['dados_ocorrencia'];
 
-
+// Limpar os dados após exibição para evitar que persistam entre requisições
 unset($_SESSION['dados_ocorrencia']);
 ?>
 
@@ -19,7 +19,6 @@ unset($_SESSION['dados_ocorrencia']);
     <meta charset="UTF-8">
     <title>Confirmação de Ocorrência</title>
     <link rel="stylesheet" href="confirmacao.css">
-
 </head>
 
 <body>
@@ -27,11 +26,11 @@ unset($_SESSION['dados_ocorrencia']);
         <h1>Ocorrência registrada com sucesso!</h1>
         <h2>Detalhes:</h2>
         <ul>
-            <li><strong>Endereço:</strong> <?= htmlspecialchars($dados['endereco']) ?></li>
-            <li><strong>CEP:</strong> <?= htmlspecialchars($dados['cep']) ?></li>
-            <li><strong>Tipo de Ocorrência:</strong> <?= htmlspecialchars($dados['tipo']) ?></li>
-            <li><strong>Item Roubado:</strong> <?= htmlspecialchars($dados['item']) ?></li>
-            <li><strong>Horário:</strong> <?= htmlspecialchars($dados['horario']) ?></li>
+            <li><strong>Endereço:</strong> <?= htmlspecialchars($dados['endereco'] ?: 'Não informado') ?></li>
+            <li><strong>CEP:</strong> <?= htmlspecialchars($dados['cep'] ?: 'Não informado') ?></li>
+            <li><strong>Tipo de Ocorrência:</strong> <?= htmlspecialchars($dados['tipo'] ?: 'Não especificado') ?></li>
+            <li><strong>Item Roubado:</strong> <?= htmlspecialchars($dados['item'] ?: 'Não especificado') ?></li>
+            <li><strong>Horário:</strong> <?= htmlspecialchars($dados['horario'] ?: 'Não especificado') ?></li>
             <li><strong>Condições da Rua:</strong> <?= htmlspecialchars($dados['condicoes'] ?: 'Não informado') ?></li>
             <li><strong>Descrição:</strong> <?= nl2br(htmlspecialchars($dados['descricao'])) ?></li>
         </ul>

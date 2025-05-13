@@ -28,7 +28,7 @@
                         <p><strong>Telefone:</strong> <span id="telefone">+55 11 98765-4321</span></p>
                         <p><strong>Gênero:</strong> <span id="genero">Masculino</span></p>
                 
-                        <!-- Formulário de edição (inicialmente oculto) -->
+                       
                         <div id="edit-form" class="hidden">
                             <input type="text" id="edit-nome" value="Nome do Usuário">
                             <input type="file" id="edit-img" accept="image/*">
@@ -57,12 +57,12 @@
                             const editBtn = document.getElementById('edit-btn');
                             const saveBtn = document.getElementById('save-btn');
                 
-                            // Alterna entre mostrar e esconder o formulário de edição
+                           
                             editForm.classList.toggle('hidden');
                             saveBtn.classList.toggle('hidden');
                             editBtn.classList.toggle('hidden');
                 
-                            // Se o formulário de edição for visível, preenche os campos com os dados atuais
+                            
                             if (!editForm.classList.contains('hidden')) {
                                 document.getElementById('edit-nome').value = document.getElementById('nome').textContent;
                                 document.getElementById('edit-email').value = document.getElementById('email').textContent;
@@ -72,13 +72,13 @@
                         }
                 
                         function saveProfile() {
-                            // Atualiza os valores no perfil
+                            
                             document.getElementById('nome').textContent = document.getElementById('edit-nome').value;
                             document.getElementById('email').textContent = document.getElementById('edit-email').value;
                             document.getElementById('telefone').textContent = document.getElementById('edit-telefone').value;
                             document.getElementById('genero').textContent = document.getElementById('edit-genero').value;
                 
-                            // Verifica se uma nova imagem foi selecionada
+                            
                             const imgInput = document.getElementById('edit-img');
                             if (imgInput.files && imgInput.files[0]) {
                                 const reader = new FileReader();
@@ -88,7 +88,7 @@
                                 reader.readAsDataURL(imgInput.files[0]);
                             }
                 
-                            // Fecha o formulário de edição
+                            
                             toggleEdit();
                         }
                     </script>
@@ -106,8 +106,9 @@
                     }
                 }
             </script>
-            <a id href="../TelaDeOcorrencia/correncia.html">Registre a ocorrência</a>
-            <a href="#">Notificações</a>
+        <a href="../TelaDeOcorrencia/ocorrencia.html">Registre a ocorrência</a>
+        <a href="http://localhost/bairro_alerta/Notificacoes/feed_ocorrencias.php">Notificações</a>
+         
         </div> 
         <div class="search-container">
             <input id="search-input" type="text" placeholder="Digite um endereço..." autocomplete="off">

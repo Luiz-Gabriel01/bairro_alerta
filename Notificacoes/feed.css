@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #000509;
+  color: #fff;
+  padding: 20px;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.topo h1 {
+  color: #DAA520;
+  font-size: 28px;
+}
+
+.voltar img {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.voltar img:hover {
+  transform: scale(1.1);
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ocorrencia {
+  background-color: #1a1a1a;
+  border-left: 6px solid #DAA520;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(218, 165, 32, 0.3);
+}
+
+.ocorrencia h2 {
+  color: #DAA520;
+  margin-bottom: 10px;
+}
+
+.ocorrencia p {
+  margin-bottom: 8px;
+}
+
+.ocorrencia small {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85em;
+  color: #aaa;
+}
+
+.nenhuma {
+  color: #ccc;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 18px;
+}

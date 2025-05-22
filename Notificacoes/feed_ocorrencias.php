@@ -20,6 +20,7 @@ $result = $conn->query($sql);
   <meta charset="UTF-8">
   <title>Feed de Ocorrências</title>
   <link rel="stylesheet" href="feed.css">
+  <link rel="icon" href="../logo.jpg" type="image/png">
 </head>
 
 <body>

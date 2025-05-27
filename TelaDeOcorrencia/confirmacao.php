@@ -1,5 +1,5 @@
 <?php
-session_start(); // Inicia a sessão apenas uma vez
+session_start();
 
 if (!isset($_SESSION['dados_ocorrencia'])) {
     echo "Nenhuma ocorrência para confirmar.";

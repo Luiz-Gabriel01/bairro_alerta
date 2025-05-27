@@ -71,3 +71,14 @@ select {
     font-size: 14px;
     display: none;
 }
+.btn-voltar-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.btn-voltar-icon:hover {
+    transform: scale(1.1);
+}

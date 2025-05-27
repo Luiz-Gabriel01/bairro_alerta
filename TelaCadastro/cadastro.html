@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tela de Cadastro Completa</title>
     <link rel="stylesheet" href="cadastro.css">
-    <style>
-    </style>
     <link rel="icon" href="../logo.jpg" type="image/png">
+    <style>
+        .btn-voltar-icon {
+            display: inline-block;
+            margin: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-voltar-icon:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
-<body> 
-    
+
+<body>
+
+    <!-- Botão de Voltar com Ícone -->
+    <a href="../TelaLogin/telaLogin.html" class="btn-voltar-icon">
+        <img src="../TelaDeOcorrencia/voltar.jpeg" alt="Voltar" width="40">
+    </a>
+
     <div class="container">
         <h2>Formulário de Inscrição</h2>
         <form id="registrationForm" action="http://localhost/bairro_alerta/cadastro_inicial.php" method="POST">
@@ -23,10 +39,17 @@
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
 
-            <button class="button" type="submit">Cadastrar</button>
+            <!-- Campo de confirmação de senha
+            <label for="confirmar_senha">Confirmar Senha:</label>
+            <input type="password" id="confirmar_senha" name="confirmar_senha" required>
 
+            Mensagem de erro -->
+            <!-- <p id="error-message" style="display:none; color: red; font-weight: bold;">
+                As senhas não coincidem.
+            </p> -->
+
+            <button class="button" type="submit">Cadastrar</button>
         </form>
-       
     </div>
 
     <script>
@@ -35,15 +58,10 @@
         const confirmarSenha = document.getElementById("confirmar_senha");
         const errorMessage = document.getElementById("error-message");
 
-        form.addEventListener("submit", function(event) {
+        form.addEventListener("submit", function (event) {
             if (senha.value !== confirmarSenha.value) {
                 errorMessage.style.display = "block";
                 event.preventDefault(); // Impede o envio do formulário
             } else {
                 errorMessage.style.display = "none";
             }
-        });
-    </script>
-</body>
-</html>
-

@@ -1,5 +1,4 @@
 <?php
-    // Conexão com o banco de dados
     $conexao = mysqli_connect('localhost', 'root', '', 'bairro_alerta');
 
     if (!$conexao) {
@@ -11,10 +10,9 @@
     }
 
     $login = $_POST['nome'];
-    $password = md5($_POST['senha']); // A senha está sendo criptografada
+    $password = md5($_POST['senha']); 
     $email = $_POST['email'];
 
-    // Verificar se o e-mail já existe no banco de dados
     $check_email_query = "SELECT * FROM usuario WHERE email = '$email'";
     $result = mysqli_query($conexao, $check_email_query);
 
@@ -25,13 +23,13 @@
               </script>";
         exit();
     } else {
-        // Inserir novo usuário
+
         $sql = "INSERT INTO usuario (nome, email, senha) VALUES ('$login', '$email', '$password')";
 
         if (mysqli_query($conexao, $sql)) {
             echo "<script>
                     alert('Cadastro realizado com sucesso!');
-                    window.location.href = './Telalogin/telaLogin.html';
+                    window.location.href = '../Telalogin/telaLogin.html';
                   </script>";
             exit();
         } else {

@@ -24,77 +24,85 @@
 
   <section class="hero">
     <div>
-   
-<div class="slideshow-container">
-    <div class="slide active">
-      <img src="logo.jpg" alt="" width="400">
-    </div>
-    <div class="slide active">
-      <img src="login.avif" alt="" width="">
-    </div>
-    <div class="slide active">
-      <img src="rota.avif" alt="" width="500">
-    </div>
-    <div class="slide active">
-      <img src="perigo.avif" alt="">
-    </div>
-    <div class="slide active">
-      <img src="formulario.jpg" alt="" width="500">
-    </div>
-    <div class="slide active">
-      <img src="furto.jpg" alt="" width="500">
-    </div>
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="logo.jpg" alt="" width="400">
+        </div>
+        <div class="slide active">
+          <img src="login.avif" alt="">
+        </div>
+        <div class="slide active">
+          <img src="rota.avif" alt="" width="500">
+        </div>
+        <div class="slide active">
+          <img src="perigo.avif" alt="">
+        </div>
+        <div class="slide active">
+          <img src="formulario.jpg" alt="" width="500">
+        </div>
+        <div class="slide active">
+          <img src="furto.jpg" alt="" width="500">
+        </div>
   
-    <!-- Botões de navegação -->
-    <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
-    <a class="next" onclick="mudarSlide(1)">&#10095;</a>
-  </div>
+        <a class="prev" onclick="mudarSlide(-1); resetTimer();">&#10094;</a>
+        <a class="next" onclick="mudarSlide(1); resetTimer();">&#10095;</a>
+      </div>
   
-  <!-- Indicadores (bolinhas) -->
-  <div class="dots-container">
-    <span class="dot" onclick="mostrarSlideAtual(0)"></span> 
-    <span class="dot" onclick="mostrarSlideAtual(1)"></span> 
-    <span class="dot" onclick="mostrarSlideAtual(2)"></span> 
-    <span class="dot" onclick="mostrarSlideAtual(3)"></span> 
-    <span class="dot" onclick="mostrarSlideAtual(4)"></span> 
-    <span class="dot" onclick="mostrarSlideAtual(5)"></span> 
+      <div class="dots-container">
+        <span class="dot" onclick="mostrarSlideAtual(0); resetTimer();"></span>
+        <span class="dot" onclick="mostrarSlideAtual(1); resetTimer();"></span>
+        <span class="dot" onclick="mostrarSlideAtual(2); resetTimer();"></span>
+        <span class="dot" onclick="mostrarSlideAtual(3); resetTimer();"></span>
+        <span class="dot" onclick="mostrarSlideAtual(4); resetTimer();"></span>
+        <span class="dot" onclick="mostrarSlideAtual(5); resetTimer();"></span>
+      </div>
+  
+      <script>
+        let slideIndex = 0;
+        let timer;
 
-  </div>
+        mostrarSlide(slideIndex);
+        startTimer();
+
+        function mudarSlide(n) {
+          mostrarSlide(slideIndex += n);
+        }
+
+        function mostrarSlideAtual(n) {
+          mostrarSlide(slideIndex = n);
+        }
+
+        function mostrarSlide(n) {
+          const slides = document.getElementsByClassName("slide");
+          const dots = document.getElementsByClassName("dot");
+
+          if (n >= slides.length) { slideIndex = 0; }
+          if (n < 0) { slideIndex = slides.length - 1; }
+
+          for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+
+          for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+
+          slides[slideIndex].style.display = "block";
+          dots[slideIndex].className += " active";
+        }
+
+        function startTimer() {
+          timer = setInterval(() => {
+            mudarSlide(1);
+          }, 3000); // Troca a cada 5 segundos
+        }
+
+        function resetTimer() {
+          clearInterval(timer);
+          startTimer();
+        }
+      </script>
   
-  <script>
-    let slideIndex = 0;
-    mostrarSlide(slideIndex);
-  
-    function mudarSlide(n) {
-      mostrarSlide(slideIndex += n);
-    }
-  
-    function mostrarSlideAtual(n) {
-      mostrarSlide(slideIndex = n);
-    }
-  
-    function mostrarSlide(n) {
-      const slides = document.getElementsByClassName("slide");
-      const dots = document.getElementsByClassName("dot");
-  
-      if (n >= slides.length) { slideIndex = 0; }
-      if (n < 0) { slideIndex = slides.length - 1; }
-  
-      // Esconder todos os slides
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-  
-      // Remover a classe 'active' de todos os pontos
-      for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-  
-      // Mostrar o slide atual e adicionar a classe 'active' ao ponto correspondente
-      slides[slideIndex].style.display = "block";
-      dots[slideIndex].className += " active";
-    }
-  </script>
     </div>
   </section>
 

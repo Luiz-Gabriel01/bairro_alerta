@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
   mysqli_stmt_bind_param($stmt_delete, "s", $email);
   if ($stmt_delete->execute()) {
     session_destroy();
-    echo "<script>alert('Conta deletada com sucesso!'); window.location.href='../TelaLogin/login.html';</script>";
+    echo "<script>alert('Conta deletada com sucesso!'); window.location.href='../TelaLogin/telaLogin.html';</script>";
     exit();
   } else {
     echo "<script>alert('Erro ao deletar conta');</script>";

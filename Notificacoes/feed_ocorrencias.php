@@ -25,7 +25,7 @@ $result = $conn->query($sql);
 
 <body>
   <div class="topo">
-    <a href="../TelaNavegacao/navegacao.html" class="voltar">
+    <a href="http://localhost/bairro_alerta/TelaNavegacao/navegacao.php" class="voltar">
       <img src="../TelaDeOcorrencia/voltar.jpeg" alt="Voltar" width="40">
     </a>
     <h1>Feed de Ocorrências</h1>

@@ -1,0 +1,172 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['id_usuario'])) {
+    echo "Usuário não está logado.";
+    exit();
+}
+
+$id_usuario = $_SESSION['id_usuario'];
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-Center</title>
+    <link rel="stylesheet" href="navegacao.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="icon" href="../logo.jpg" type="image/png">
+</head>
+
+<body>
+    <div class="containeMenu">
+        <div class="containeLink">
+
+            <div class="header">
+                <!-- Mantendo o botão de perfil, mas sem abrir modal -->
+                <button onclick="window.location.href='http://localhost/bairro_alerta/PerfilUsuario/Perfil.php';">
+                    <img src="../TelaNavegacao/perfil.webp" width="40" alt="Perfil">
+                </button>
+            </div>
+
+            <!-- Links de navegação -->
+            <a href="http://localhost/bairro_alerta/TelaDeOcorrencia/correncia.html">Registre a ocorrência</a>
+            <a href="http://localhost/bairro_alerta/Notificacoes/feed_ocorrencias.php">Notificações</a>
+        </div>
+
+        <div class="search-container">
+            <input id="search-input" type="text" placeholder="Digite um endereço..." autocomplete="off">
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+            <button id="search-btn" type="button">Buscar</button>
+            <button id="my-location-btn" type="button">Minha Localização</button>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map, marker, userLat, userLon;
+
+            function initMap(lat, lon) {
+                if (!map) {
+                    map = L.map('map').setView([lat, lon], 13);
+
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+                } else {
+                    map.setView([lat, lon], 13);
+                }
+
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+
+                marker = L.marker([lat, lon]).addTo(map)
+                    .bindPopup('Você está aqui!')
+                    .openPopup();
+            }
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        userLat = position.coords.latitude;
+                        userLon = position.coords.longitude;
+                        initMap(userLat, userLon);
+                    }, function() {
+                        alert('Não foi possível obter sua localização.');
+                        initMap(51.505, -0.09);
+                    });
+                } else {
+                    alert('Geolocalização não é suportada pelo seu navegador.');
+                    initMap(51.505, -0.09);
+                }
+            }
+
+            function searchAddress(address) {
+                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            var lat = data[0].lat;
+                            var lon = data[0].lon;
+                            initMap(lat, lon);
+                            marker.bindPopup(`Endereço: ${address}`).openPopup();
+                        } else {
+                            alert('Endereço não encontrado.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar o endereço:', error);
+                        alert('Ocorreu um erro ao buscar o endereço.');
+                    });
+            }
+
+            function autocomplete(input) {
+                input.addEventListener("input", function() {
+                    var val = this.value;
+                    var list = document.getElementById("autocomplete-list");
+
+                    list.innerHTML = '';
+
+                    if (!val) return false;
+
+                    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(val)}&addressdetails=1&limit=5`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(function(item) {
+                                var suggestion = document.createElement("div");
+                                suggestion.innerHTML = item.display_name;
+                                suggestion.addEventListener("click", function() {
+                                    input.value = item.display_name;
+                                    list.innerHTML = '';
+                                    searchAddress(item.display_name);
+                                });
+                                list.appendChild(suggestion);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Erro ao obter sugestões:', error);
+                        });
+                });
+            }
+
+            document.getElementById('search-btn').addEventListener('click', function() {
+                var address = document.getElementById('search-input').value;
+                if (address) {
+                    searchAddress(address);
+                } else {
+                    alert('Por favor, insira um endereço.');
+                }
+            });
+
+            document.getElementById('my-location-btn').addEventListener('click', function() {
+                if (userLat && userLon) {
+                    initMap(userLat, userLon);
+                    marker.bindPopup('Você está aqui!').openPopup();
+                } else {
+                    alert('Localização atual não disponível.');
+                }
+            });
+
+            autocomplete(document.getElementById('search-input'));
+            getLocation();
+        });
+    </script>
+</body>
+
+</html>

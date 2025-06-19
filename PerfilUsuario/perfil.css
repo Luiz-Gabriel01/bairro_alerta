@@ -1,0 +1,101 @@
+/* Fonte elegante e moderna */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  background-color: #000000;
+  /* preto puro */
+  color: #DAA520;
+  /* dourado */
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  text-align: center;
+  text-shadow: 0 0 6px #DAA520;
+}
+
+form {
+  background-color: #111111;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #DAA520aa;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 12px 10px;
+  margin-bottom: 20px;
+  border: 2px solid #DAA520;
+  border-radius: 6px;
+  background-color: #222;
+  color: #DAA520;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: #f2c94c;
+  background-color: #333;
+}
+
+button {
+  width: 100%;
+  padding: 14px 0;
+  background-color: #DAA520;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #DAA520cc;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #b88f1f;
+  box-shadow: 0 0 15px #f7de7e;
+}
+
+a {
+  color: #DAA520;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  text-shadow: 0 0 4px #DAA520aa;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f7de7e;
+  text-shadow: 0 0 8px #f7de7e;
+}
+
+form+form {
+  margin-top: -10px;
+  /* para juntar os botões dos dois formulários com menos espaço */
+}

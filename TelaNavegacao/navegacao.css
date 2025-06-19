@@ -1,11 +1,25 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+
+/* body {
+    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     width: 100vw;
     height: 100vh;
     margin: 0;
-}
+} */
 
 .search-container {
     display: flex;
@@ -191,7 +205,7 @@ body {
 
 
 
-    body {
+    /* body {
         font-family: 'Arial', sans-serif;
         background-color: #e5e5e5;
         margin: 0;
@@ -200,7 +214,7 @@ body {
         justify-content: center;
         align-items: center;
         height: 100vh;
-    } 
+    }  */
     .profile-card { 
         background-color: white;
         width: 350px;
@@ -249,7 +263,7 @@ body {
 
 
 
-    body {
+    /* body {
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
@@ -257,7 +271,7 @@ body {
         height: 100vh;
         margin: 0;
         background-color: #f4f4f4;
-    }
+    } */
 
     .profile-container {
         background-color: white;

@@ -34,7 +34,7 @@ unset($_SESSION['dados_ocorrencia']);
             <li><strong>Condições da Rua:</strong> <?= htmlspecialchars($dados['condicoes'] ?: 'Não informado') ?></li>
             <li><strong>Descrição:</strong> <?= nl2br(htmlspecialchars($dados['descricao'])) ?></li>
         </ul>
-        <a href="http://localhost/bairro_alerta/TelaNavegacao/navegacao.html" class="btn-voltar">Voltar ao início</a>
+        <a href="http://localhost/bairro_alerta/TelaNavegacao/navegacao.php" class="btn-voltar">Voltar ao início</a>
     </div>
 </body>
 

@@ -10,6 +10,22 @@ body {
     align-items: center;
     background-color: #f4f4f4;
 }
+#map {
+    z-index: 0;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.autocomplete-items {
+    position: absolute;
+    background-color: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    top: 38px;
+    width: 100%;
+}
 
 
 /* body {

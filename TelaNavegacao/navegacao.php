@@ -7,7 +7,6 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 $id_usuario = $_SESSION['id_usuario'];
-
 ?>
 
 <!DOCTYPE html>
@@ -20,21 +19,18 @@ $id_usuario = $_SESSION['id_usuario'];
     <link rel="stylesheet" href="navegacao.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
     <link rel="icon" href="../logo.jpg" type="image/png">
 </head>
 
 <body>
     <div class="containeMenu">
         <div class="containeLink">
-
             <div class="header">
-                <!-- Mantendo o botão de perfil, mas sem abrir modal -->
                 <button onclick="window.location.href='http://localhost/bairro_alerta/PerfilUsuario/Perfil.php';">
                     <img src="../TelaNavegacao/perfil.webp" width="40" alt="Perfil">
                 </button>
             </div>
-
-            <!-- Links de navegação -->
             <a href="http://localhost/bairro_alerta/TelaDeOcorrencia/correncia.html">Registre a ocorrência</a>
             <a href="http://localhost/bairro_alerta/Notificacoes/feed_ocorrencias.php">Notificações</a>
         </div>
@@ -51,10 +47,13 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var map, marker, userLat, userLon;
+            let map, userLat, userLon;
+            let routeControl = null;
+            let currentMarkers = [];
 
             function initMap(lat, lon) {
                 if (!map) {
@@ -68,13 +67,20 @@ $id_usuario = $_SESSION['id_usuario'];
                     map.setView([lat, lon], 13);
                 }
 
-                if (marker) {
-                    map.removeLayer(marker);
-                }
+                clearMapElements();
 
-                marker = L.marker([lat, lon]).addTo(map)
-                    .bindPopup('Você está aqui!')
-                    .openPopup();
+                const marker = L.marker([lat, lon]).addTo(map).bindPopup('Você está aqui!').openPopup();
+                currentMarkers.push(marker);
+            }
+
+            function clearMapElements() {
+                currentMarkers.forEach(marker => map.removeLayer(marker));
+                currentMarkers = [];
+
+                if (routeControl) {
+                    map.removeControl(routeControl);
+                    routeControl = null;
+                }
             }
 
             function getLocation() {
@@ -85,25 +91,53 @@ $id_usuario = $_SESSION['id_usuario'];
                         initMap(userLat, userLon);
                     }, function() {
                         alert('Não foi possível obter sua localização.');
-                        initMap(51.505, -0.09);
+                        initMap(-15.77972, -47.92972);
                     });
                 } else {
                     alert('Geolocalização não é suportada pelo seu navegador.');
-                    initMap(51.505, -0.09);
+                    initMap(-15.77972, -47.92972);
                 }
             }
 
+            function drawRoute(start, end) {
+                clearMapElements();
+
+                routeControl = L.Routing.control({
+                    waypoints: [
+                        L.latLng(start[0], start[1]),
+                        L.latLng(end[0], end[1])
+                    ],
+                    lineOptions: {
+                        styles: [{
+                            color: 'red',
+                            weight: 5
+                        }]
+                    },
+                    createMarker: function(i, wp) {
+                        const marker = L.marker(wp.latLng);
+                        currentMarkers.push(marker);
+                        return marker;
+                    },
+                    routeWhileDragging: false,
+                    show: true
+                }).addTo(map);
+            }
+
             function searchAddress(address) {
-                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+                if (!userLat || !userLon) {
+                    alert('Localização atual ainda não foi obtida.');
+                    return;
+                }
+
+                const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1&countrycodes=br`;
 
                 fetch(url)
                     .then(response => response.json())
                     .then(data => {
                         if (data.length > 0) {
-                            var lat = data[0].lat;
-                            var lon = data[0].lon;
-                            initMap(lat, lon);
-                            marker.bindPopup(`Endereço: ${address}`).openPopup();
+                            const destLat = parseFloat(data[0].lat);
+                            const destLon = parseFloat(data[0].lon);
+                            drawRoute([userLat, userLon], [destLat, destLon]);
                         } else {
                             alert('Endereço não encontrado.');
                         }
@@ -116,26 +150,35 @@ $id_usuario = $_SESSION['id_usuario'];
 
             function autocomplete(input) {
                 input.addEventListener("input", function() {
-                    var val = this.value;
-                    var list = document.getElementById("autocomplete-list");
-
+                    const val = this.value;
+                    const list = document.getElementById("autocomplete-list");
                     list.innerHTML = '';
 
                     if (!val) return false;
 
-                    var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(val)}&addressdetails=1&limit=5`;
+                    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(val)}&addressdetails=1&limit=5&countrycodes=br`;
 
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
                             data.forEach(function(item) {
-                                var suggestion = document.createElement("div");
-                                suggestion.innerHTML = item.display_name;
+                                const road = item.address.road || '';
+                                const city = item.address.city || item.address.town || item.address.village || '';
+                                const state = item.address.state || '';
+                                const displayText = `${road} - ${city} - ${state}`;
+
+                                const suggestion = document.createElement("div");
+                                suggestion.classList.add("autocomplete-suggestion");
+                                suggestion.innerHTML = displayText;
+
                                 suggestion.addEventListener("click", function() {
                                     input.value = item.display_name;
                                     list.innerHTML = '';
-                                    searchAddress(item.display_name);
+                                    const lat = parseFloat(item.lat);
+                                    const lon = parseFloat(item.lon);
+                                    drawRoute([userLat, userLon], [lat, lon]);
                                 });
+
                                 list.appendChild(suggestion);
                             });
                         })
@@ -146,7 +189,7 @@ $id_usuario = $_SESSION['id_usuario'];
             }
 
             document.getElementById('search-btn').addEventListener('click', function() {
-                var address = document.getElementById('search-input').value;
+                const address = document.getElementById('search-input').value;
                 if (address) {
                     searchAddress(address);
                 } else {
@@ -157,7 +200,6 @@ $id_usuario = $_SESSION['id_usuario'];
             document.getElementById('my-location-btn').addEventListener('click', function() {
                 if (userLat && userLon) {
                     initMap(userLat, userLon);
-                    marker.bindPopup('Você está aqui!').openPopup();
                 } else {
                     alert('Localização atual não disponível.');
                 }
